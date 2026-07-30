@@ -1,31 +1,39 @@
-html {
-  font-size: 14px;
+a {
+  cursor: pointer !important;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.custom-navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+.udemy-search-input {
+  border-radius: 50rem !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  padding-left: 45px !important;
+  transition: all 0.2s ease-in-out;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.udemy-search-input:focus {
+  background-color: #ffffff !important;
+  border-color: #0f172a !important;
+  box-shadow: none !important;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.search-icon-wrapper {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: #64748b;
 }
-
-body {
-  margin-bottom: 60px;
+.btn {
+  margin-right: 1rem !important;
 }
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.btn-outline-dark:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj": {}
+    "E:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj": {}
   },
   "projects": {
-    "e:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj": {
+    "E:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj",
+        "projectUniqueName": "E:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj",
         "projectName": "Online_Course_selling",
-        "projectPath": "e:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj",
+        "projectPath": "E:\\learn-C#\\Online_Course_selling\\Online_Course_selling.csproj",
         "packagesPath": "C:\\Users\\mic\\.nuget\\packages\\",
-        "outputPath": "e:\\learn-C#\\Online_Course_selling\\obj\\",
+        "outputPath": "E:\\learn-C#\\Online_Course_selling\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mic\\AppData\\Roaming\\NuGet\\NuGet.Config"
