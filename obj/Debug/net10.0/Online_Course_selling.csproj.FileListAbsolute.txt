@@ -89,4 +89,4 @@ E:\learn-C#\Online_Course_selling\obj\Debug\net10.0\refint\Online_Course_selling
 E:\learn-C#\Online_Course_selling\obj\Debug\net10.0\Online_Course_selling.pdb
 E:\learn-C#\Online_Course_selling\obj\Debug\net10.0\Online_Course_selling.genruntimeconfig.cache
 E:\learn-C#\Online_Course_selling\obj\Debug\net10.0\ref\Online_Course_selling.dll
-E:\learn-C#\Online_Course_selling\obj\Debug\net10.0\compressed\hy1a193f1d-{0}-v4fodu7qj5-v4fodu7qj5.gz
+E:\learn-C#\Online_Course_selling\obj\Debug\net10.0\compressed\hy1a193f1d-{0}-96o1lddp9e-96o1lddp9e.gz
