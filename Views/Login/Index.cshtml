@@ -4,27 +4,22 @@
 }
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 py-5">
 
-    <!-- Back to Home Link -->
-    <div class="w-100 max-w-400 mb-3 text-start">
-        <a asp-controller="Home" href="/" asp-action="Index" class="text-decoration-none text-muted fw-semibold small">
-            <i class="bi bi-arrow-left me-1"></i> Back to Home
-        </a>
+    <div class="w-100" style="max-width: 420px;">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm mb-3" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
     </div>
-
-    <!-- Login Card -->
     <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5 w-100"
          style="max-width: 420px; background-color: #ffffff;">
-
-        <!-- Header -->
         <div class="text-center mb-4">
             <h2 class="fw-bold text-dark mb-1">Welcome Back</h2>
             <p class="text-muted small">Please enter your details to sign in.</p>
         </div>
-
-        <!-- Form -->
         <form method="post" asp-action="Login" class="needs-validation" novalidate>
-
-            <!-- Username Field -->
             <div class="form-floating mb-3">
                 <input type="text" class="form-control rounded-3" id="username" name="username"
                        placeholder="name@example.com" required />
@@ -35,8 +30,6 @@
                        placeholder="Password" required />
                 <label for="password" class="text-muted">Password</label>
             </div>
-
-            <!-- Remember Me & Forgot Password (Optional Useful Addition) -->
             <div class="d-flex justify-content-between align-items-center mb-4 small">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="rememberMe" />
@@ -44,8 +37,6 @@
                 </div>
                 <a href="#" class="text-decoration-none text-primary fw-semibold">Forgot password?</a>
             </div>
-
-            <!-- Submit Button -->
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary btn-lg rounded-3 fw-semibold py-2">Sign In</button>
             </div>

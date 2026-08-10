@@ -1,4 +1,4 @@
-namespace YourProjectName.Models
+namespace My_project.Models
 {
     public class User
     {
