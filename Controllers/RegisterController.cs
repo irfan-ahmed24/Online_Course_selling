@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity; // PasswordHasher এর জন্য
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using My_project.Data;
 using My_project.Models;
