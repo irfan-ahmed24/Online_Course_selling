@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Manage Settings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="mb-4">
+        <h3 class="fw-bold text-dark">Platform Settings</h3>
+        <p class="text-muted small">Overview of your online course platform configuration.</p>
+    </div>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-info-circle text-primary me-2"></i> About Platform</h5>
+                <p class="text-secondary mb-2">
+                    This is a simplified Udemy-model online learning platform where instructors can upload courses, and
+                    students can easily enroll and learn.
+                </p>
+                <hr class="text-muted opacity-25 my-3">
+                <div class="row text-muted small">
+                    <div class="col-sm-6">
+                        <p class="mb-1"><strong>Platform Version:</strong> v1.0.0 (Simple Edition)</p>
+                        <p class="mb-1"><strong>Framework:</strong> ASP.NET Core MVC</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-1"><strong>Database:</strong> Entity Framework Core</p>
+                        <p class="mb-1"><strong>Status:</strong> <span class="text-success fw-bold">Active &
+                            Running</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-light">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-headset text-secondary me-2"></i> Need Help?</h6>
+                <p class="text-muted small mb-0">
+                    If you face any issues regarding course approvals, user management, or database connections, please
+                    check your Visual Studio output window or contact system support.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
