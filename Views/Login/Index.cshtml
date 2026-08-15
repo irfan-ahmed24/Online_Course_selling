@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 py-5">
+
+    <div class="w-100" style="max-width: 420px;">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm mb-3" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+    <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5 w-100"
+         style="max-width: 420px; background-color: #ffffff;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-dark mb-1">Welcome Back</h2>
+            <p class="text-muted small">Please enter your details to sign in.</p>
+        </div>
+        <form method="post" asp-action="Login" class="needs-validation" novalidate>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-3" id="username" name="username"
+                       placeholder="name@example.com" required />
+                <label for="username" class="text-muted">Username or Email</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-3" id="password" name="password"
+                       placeholder="Password" required />
+                <label for="password" class="text-muted">Password</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4 small">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" />
+                    <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="text-decoration-none text-primary fw-semibold">Forgot password?</a>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg rounded-3 fw-semibold py-2">Sign In</button>
+            </div>
+        </form>
+    </div>
+</div>

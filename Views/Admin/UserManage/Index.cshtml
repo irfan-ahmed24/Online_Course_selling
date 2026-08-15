@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "User Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-dark">User Management</h3>
+            <p class="text-muted small">Manage all registered students and teachers.</p>
+        </div>
+        <a href="/Admin/UserManage/Add" class="btn btn-primary rounded-3 shadow-sm px-4">
+            <i class="bi bi-person-plus-fill me-1"></i> Add New User
+        </a>
+    </div>
+    <div class="card border-0 shadow-sm rounded-4 p-4">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="py-3">User Details</th>
+                        <th class="py-3">Role</th>
+                        <th class="py-3">Account Status</th>
+                        <th class="py-3 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                     style="width: 45px; height: 45px;">
+                                    RA
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Rahim Ahmed</div>
+                                    <small class="text-muted">rahim@example.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-info bg-opacity-10 text-info px-3 py-2">Student</span></td>
+                        <td><span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Verified</span></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary rounded-3 me-1"><i
+                                class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger rounded-3"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                     style="width: 45px; height: 45px;">
+                                    SK
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Sabbir Khan</div>
+                                    <small class="text-muted">sabbir@example.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Teacher</span></td>
+                        <td><span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Pending</span></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-success rounded-3 me-1"><i class="bi bi-check-lg"></i>
+                                Approve
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger rounded-3"><i class="bi bi-x-lg"></i>
+                                Reject
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

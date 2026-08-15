@@ -1,0 +1,137 @@
+@{
+    ViewData["Title"] = "Earnings & Sales";
+    Layout = "~/Views/Shared/_TeacherLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-dark">Earnings & Sales</h3>
+            <p class="text-muted small">Track your total revenue, student enrollments, and payout history.</p>
+        </div>
+    </div>
+    <div class="row g-4 mb-4">
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                <div class="d-flex align-items-center">
+                    <div class="bg-success bg-opacity-10 text-success rounded-3 d-flex align-items-center justify-content-center me-3"
+                         style="width: 55px; height: 55px;">
+                        <i class="bi bi-wallet2 fs-3"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small">Total Revenue</span>
+                        <h3 class="fw-bold mb-0 text-dark">$1,280.00</h3>
+                        <small class="text-success"><i class="bi bi-arrow-up-short"></i> +15% this month</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-3 d-flex align-items-center justify-content-center me-3"
+                         style="width: 55px; height: 55px;">
+                        <i class="bi bi-cash-stack fs-3"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small">Available for Payout</span>
+                        <h3 class="fw-bold mb-0 text-dark">$450.00</h3>
+                        <small class="text-muted">Next payout on 1st Sept</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-12">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                <div class="d-flex align-items-center">
+                    <div class="bg-warning bg-opacity-10 text-warning rounded-3 d-flex align-items-center justify-content-center me-3"
+                         style="width: 55px; height: 55px;">
+                        <i class="bi bi-cart-check fs-3"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small">Total Courses Sold</span>
+                        <h3 class="fw-bold mb-0 text-dark">42 Sales</h3>
+                        <small class="text-muted">Across all your courses</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 shadow-sm rounded-4 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0 text-dark">Recent Sales History</h5>
+            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Updated Live</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="py-3">Transaction ID</th>
+                        <th class="py-3">Student Name</th>
+                        <th class="py-3">Course Title</th>
+                        <th class="py-3">Date</th>
+                        <th class="py-3 text-end">Amount</th>
+                        <th class="py-3 text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="fw-semibold text-secondary">#TRX-98214</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                     style="width: 32px; height: 32px; font-size: 12px;">
+                                    RA
+                                </div>
+                                <span class="fw-semibold">Rahim Ahmed</span>
+                            </div>
+                        </td>
+                        <td>React.js Advanced Masterclass</td>
+                        <td><small class="text-muted">Aug 15, 2026</small></td>
+                        <td class="text-end fw-bold text-success">$49.99</td>
+                        <td class="text-center">
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Completed</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fw-semibold text-secondary">#TRX-98213</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                     style="width: 32px; height: 32px; font-size: 12px;">
+                                    NS
+                                </div>
+                                <span class="fw-semibold">Nusrat Sultana</span>
+                            </div>
+                        </td>
+                        <td>Complete Laravel & Node.js API</td>
+                        <td><small class="text-muted">Aug 14, 2026</small></td>
+                        <td class="text-end fw-bold text-success">$39.99</td>
+                        <td class="text-center">
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Completed</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fw-semibold text-secondary">#TRX-98210</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                     style="width: 32px; height: 32px; font-size: 12px;">
+                                    TM
+                                </div>
+                                <span class="fw-semibold">Tanvir Mahmud</span>
+                            </div>
+                        </td>
+                        <td>Figma to Web Design Essentials</td>
+                        <td><small class="text-muted">Aug 12, 2026</small></td>
+                        <td class="text-end fw-bold text-success">$29.99</td>
+                        <td class="text-center">
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Completed</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
