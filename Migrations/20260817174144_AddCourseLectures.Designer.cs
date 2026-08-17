@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using My_project.Data;
 
@@ -11,9 +12,11 @@ using My_project.Data;
 namespace Online_Course_selling.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260817174144_AddCourseLectures")]
+    partial class AddCourseLectures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,8 +44,12 @@ namespace Online_Course_selling.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("LectureVideoUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("ThumbnailUrl")
                         .HasColumnType("longtext");
@@ -50,9 +57,6 @@ namespace Online_Course_selling.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("VideoCount")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
