@@ -1,5 +1,136 @@
 @{
-    ViewData["Title"] = "Enrolled Courses";
+    ViewData["Title"] = "My Enrolled Courses";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-<h1>this is Enrolled Courses</h1>
+
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-dark">My Enrolled Courses</h3>
+            <p class="text-muted small">Access and continue learning from the courses you have purchased.</p>
+        </div>
+        <div>
+            <a asp-controller="Student" asp-action="Explore" class="btn btn-primary rounded-3 shadow-sm px-3">
+                <i class="bi bi-compass me-1"></i> Explore More Courses
+            </a>
+        </div>
+    </div>
+
+    <!-- Success Alert -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Enrolled Courses Grid -->
+    <div class="row g-4">
+        <!-- Course Card 1 -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+                <div class="bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center position-relative"
+                     style="height: 170px;">
+                    <i class="bi bi-play-circle fs-1 opacity-75"></i>
+                    <span class="position-absolute top-0 end-0 m-3 badge bg-primary px-3 py-2 rounded-pill">
+                        Active
+                    </span>
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="text-muted small fw-semibold mb-1">Web Development</span>
+                    <h5 class="fw-bold text-dark mb-2">React.js Advanced Masterclass</h5>
+                    <p class="text-muted small mb-3">Instructor: Sabbir Khan</p>
+
+                    <!-- Progress Bar -->
+                    <div class="mt-auto mb-3">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Course Progress</span>
+                            <span class="fw-semibold text-primary">65%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 65%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <a href="/Student/WatchCourse/1" class="btn btn-primary rounded-3 w-100 shadow-sm">
+                        <i class="bi bi-play-fill me-1"></i> Continue Learning
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Card 2 -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+                <div class="bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center position-relative"
+                     style="height: 170px;">
+                    <i class="bi bi-play-circle fs-1 opacity-75"></i>
+                    <span class="position-absolute top-0 end-0 m-3 badge bg-success px-3 py-2 rounded-pill">
+                        Active
+                    </span>
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="text-muted small fw-semibold mb-1">Backend Development</span>
+                    <h5 class="fw-bold text-dark mb-2">Complete Laravel & Node.js API</h5>
+                    <p class="text-muted small mb-3">Instructor: John Doe</p>
+
+                    <!-- Progress Bar -->
+                    <div class="mt-auto mb-3">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Course Progress</span>
+                            <span class="fw-semibold text-success">30%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 30%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <a href="/Student/WatchCourse/2" class="btn btn-outline-success rounded-3 w-100">
+                        <i class="bi bi-play-fill me-1"></i> Continue Learning
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Card 3 -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+                <div class="bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center position-relative"
+                     style="height: 170px;">
+                    <i class="bi bi-play-circle fs-1 opacity-75"></i>
+                    <span class="position-absolute top-0 end-0 m-3 badge bg-secondary px-3 py-2 rounded-pill">100%
+                        Completed
+                    </span>
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="text-muted small fw-semibold mb-1">UI/UX Design</span>
+                    <h5 class="fw-bold text-dark mb-2">Figma to Web Design Essentials</h5>
+                    <p class="text-muted small mb-3">Instructor: Sarah Ahmed</p>
+
+                    <!-- Progress Bar -->
+                    <div class="mt-auto mb-3">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Course Progress</span>
+                            <span class="fw-semibold text-success">Completed</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <a href="/Student/WatchCourse/3" class="btn btn-outline-secondary rounded-3 w-100">
+                        <i class="bi bi-arrow-repeat me-1"></i> Review Course
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

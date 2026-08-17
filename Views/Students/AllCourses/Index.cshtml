@@ -1,6 +1,145 @@
 @{
-    ViewData["Title"] = "All Courses";
+    ViewData["Title"] = "Explore All Courses";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-<h1>this is All Courses</h1>
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-dark">Explore All Courses</h3>
+            <p class="text-muted small">Discover professional courses, learn new skills, and advance your career.</p>
+        </div>
+        <!-- Search Bar -->
+        <div class="w-25">
+            <input type="text" class="form-control rounded-pill shadow-sm px-3" placeholder="Search courses...">
+        </div>
+    </div>
+
+    <!-- Category Filter Buttons -->
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm">All Courses</button>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">Web Development</button>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">Backend & API</button>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">UI/UX Design</button>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">Data Science</button>
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="row g-4">
+        <!-- Course Card 1 -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+                <div class="bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center position-relative"
+                     style="height: 170px;">
+                    <i class="bi bi-file-earmark-play fs-1 opacity-75"></i>
+                    <span class="position-absolute top-0 end-0 m-3 badge bg-danger px-3 py-2 rounded-pill">Best
+                        Seller
+                    </span>
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="text-muted small fw-semibold mb-1">Web Development</span>
+                    <h5 class="fw-bold text-dark mb-2">React.js Advanced Masterclass</h5>
+                    <p class="text-muted small mb-3">Learn modern React, hooks, context API, and build professional
+                        apps.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="fw-bold text-success fs-5">$49.99</span>
+                        <span class="text-muted small"><i class="bi bi-people text-warning me-1"></i> 520+
+                            Students
+                        </span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-3 flex-grow-1">View Details</a>
+                        <a href="#" class="btn btn-primary btn-sm rounded-3 px-3" title="Add to Cart">
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+                        <a href="#" class="btn btn-light btn-sm rounded-3 text-danger" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Card 2 -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+                <div class="bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center position-relative"
+                     style="height: 170px;">
+                    <i class="bi bi-file-earmark-play fs-1 opacity-75"></i>
+                    <span class="position-absolute top-0 end-0 m-3 badge bg-success px-3 py-2 rounded-pill">
+                        Popular
+                    </span>
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="text-muted small fw-semibold mb-1">Backend Development</span>
+                    <h5 class="fw-bold text-dark mb-2">Complete Laravel & Node.js API</h5>
+                    <p class="text-muted small mb-3">Master backend development, RESTful APIs, and database security.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="fw-bold text-success fs-5">$39.99</span>
+                        <span class="text-muted small"><i class="bi bi-people text-warning me-1"></i> 340+
+                            Students
+                        </span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-success btn-sm rounded-3 flex-grow-1">View Details</a>
+                        <a href="#" class="btn btn-success btn-sm rounded-3 px-3" title="Add to Cart">
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+                        <a href="#" class="btn btn-light btn-sm rounded-3 text-danger" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Card 3 -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+                <div class="bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center position-relative"
+                     style="height: 170px;">
+                    <i class="bi bi-file-earmark-play fs-1 opacity-75"></i>
+                    <span class="position-absolute top-0 end-0 m-3 badge bg-danger px-3 py-2 rounded-pill">Hot</span>
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="text-muted small fw-semibold mb-1">UI/UX Design</span>
+                    <h5 class="fw-bold text-dark mb-2">Figma to Web Design Essentials</h5>
+                    <p class="text-muted small mb-3">Learn wireframing, prototyping, and modern web design principles.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="fw-bold text-success fs-5">$29.99</span>
+                        <span class="text-muted small"><i class="bi bi-people text-warning me-1"></i> 610+
+                            Students
+                        </span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-warning btn-sm rounded-3 flex-grow-1 text-dark">View
+                            Details
+                        </a>
+                        <a href="#" class="btn btn-warning btn-sm rounded-3 px-3 text-dark" title="Add to Cart">
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+                        <a href="#" class="btn btn-light btn-sm rounded-3 text-danger" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

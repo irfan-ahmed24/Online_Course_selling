@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Online_Course_selling.Controllers
 {
+    [Route("Logout")]
     public class LogoutController : Controller
     {
         public IActionResult Index()
