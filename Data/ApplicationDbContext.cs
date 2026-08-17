@@ -9,8 +9,19 @@ namespace My_project.Data
             : base(options)
         {
         }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseLecture> CourseLectures { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CourseLecture>()
+                .HasOne(l => l.Course)
+                .WithMany(c => c.Lectures)
+                .HasForeignKey(l => l.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

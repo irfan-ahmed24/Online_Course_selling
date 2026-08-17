@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2026 at 08:26 PM
+-- Generation Time: Aug 17, 2026 at 09:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,24 +34,6 @@ CREATE TABLE `courselectures` (
   `CourseId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `courselectures`
---
-
-INSERT INTO `courselectures` (`Id`, `LectureTitle`, `VideoUrl`, `CourseId`) VALUES
-(1, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 1),
-(2, 'atif aslam song2', 'https://youtu.be/SxTYjptEzZs?si=uGubPgBLD44y9CyB', 1),
-(3, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 2),
-(4, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 2),
-(5, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 3),
-(6, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 3),
-(7, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 3),
-(8, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 4),
-(9, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 4),
-(10, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 4),
-(11, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 5),
-(12, 'Atif Aslam song', 'https://youtu.be/XvLJYyBTQKA?si=Z3Jt6hl0D7po3Y5e', 5);
-
 -- --------------------------------------------------------
 
 --
@@ -68,17 +50,6 @@ CREATE TABLE `courses` (
   `CreatedAt` datetime(6) NOT NULL,
   `VideoCount` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `courses`
---
-
-INSERT INTO `courses` (`Id`, `Title`, `Category`, `Price`, `Description`, `ThumbnailUrl`, `CreatedAt`, `VideoCount`) VALUES
-(1, 'song', 'Web Development', 200.00, 'this is song for test', NULL, '2026-08-17 23:55:43.209065', 0),
-(2, 'songs', 'Mobile App Development', 300.00, 'this is also for test', '/uploads/thumbnails/e1c63afb-125a-4fac-9cf2-9fd3eafaa128_Screenshot 2025-10-30 205640.png', '2026-08-18 00:01:41.358278', 0),
-(3, 'songs 3', 'Web Development', 200.00, 'this is also for test', '/uploads/thumbnails/4d369edc-a0b5-404e-863c-92e2c92cec1e_Screenshot 2026-07-17 020125.png', '2026-08-18 00:19:20.028546', 3),
-(4, 'jhlkjh', 'Mobile App Development', 200.00, 'hgljhgbljk hjhkujhljkgbljglhg jigb hg ', '/uploads/thumbnails/c5fe652b-a46e-4ab0-8463-f0dd633c4cfd_Screenshot 2026-04-01 010135.png', '2026-08-18 00:21:09.166325', 3),
-(5, 'hjgbj', 'Mobile App Development', 200.00, 'jsahdjfa aj shf jajkh jhajdsf', '/uploads/thumbnails/43e46054-24fe-472a-8a88-478eb298fabb_Screenshot 2026-05-15 164242.png', '2026-08-18 00:24:32.443980', 2);
 
 -- --------------------------------------------------------
 
@@ -160,7 +131,7 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT for table `courselectures`
 --
 ALTER TABLE `courselectures`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `courses`
