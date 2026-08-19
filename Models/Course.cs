@@ -12,7 +12,7 @@ namespace My_project.Models
         public string Title { get; set; } = "";
 
         [Required]
-        public string Category { get; set; } = "";
+        public string Category { get; set; } = ""; // এখানে ঠিক করা হয়েছে
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
@@ -23,6 +23,9 @@ namespace My_project.Models
 
         public string? ThumbnailUrl { get; set; }
         public int VideoCount { get; set; }
+
+        [Required]
+        public int TeacherId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public List<CourseLecture> Lectures { get; set; } = new List<CourseLecture>();

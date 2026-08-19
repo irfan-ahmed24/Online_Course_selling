@@ -39,6 +39,7 @@ namespace My_project.controller
             }
             HttpContext.Session.SetString("UserRole", user.Role);
             HttpContext.Session.SetString("UserName", user.FullName);
+            HttpContext.Session.SetInt32("UserId", user.Id);
 
             TempData["SuccessMessage"] = $"Welcome back, {user.FullName}!";
             if (user.Role == "Admin")

@@ -5,6 +5,7 @@ using My_project.Models;
 
 namespace My_project.controllers
 {
+    [Route("TeacherRegister")]
     public class TeacherRegisterController : Controller
     {
         private readonly ApplicationDbContext _context;

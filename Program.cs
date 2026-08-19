@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using My_project.Data;
+using My_project.Middlewares; // কাস্টম মিডলওয়্যারের নেমস্পেস যুক্ত করা হলো
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpContextAccessor();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -28,6 +31,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
+app.UseMiddleware<LoginMiddleware>();
 
 app.UseAuthorization();
 

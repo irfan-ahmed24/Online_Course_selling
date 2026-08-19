@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace My_project.controllers
 {
-
     [Route("Teachers/Dashboard")]
     public class TeacherDashboardController : Controller
     {

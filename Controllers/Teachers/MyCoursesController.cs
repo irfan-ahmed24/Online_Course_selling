@@ -18,7 +18,13 @@ namespace My_project.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var courses = await _context.Courses.OrderByDescending(c => c.CreatedAt).ToListAsync();
+            int? teacherId = HttpContext.Session.GetInt32("UserId");
+            if (teacherId == null) return RedirectToAction("Index", "Login");
+
+            var courses = await _context.Courses
+                .Where(c => c.TeacherId == teacherId.Value)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
 
             return View("~/Views/Teachers/My Courses/MyCourses.cshtml", courses);
         }
@@ -26,14 +32,14 @@ namespace My_project.Controllers
         [HttpGet("CourseDetails/{id}")]
         public async Task<IActionResult> CourseDetails(int id)
         {
+            int? teacherId = HttpContext.Session.GetInt32("UserId");
+            if (teacherId == null) return RedirectToAction("Index", "Login");
+
             var course = await _context.Courses
                 .Include(c => c.Lectures)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id && c.TeacherId == teacherId.Value);
 
-            if (course == null)
-            {
-                return NotFound();
-            }
+            if (course == null) return NotFound();
 
             return View("~/Views/Teachers/My Courses/CourseDetails.cshtml", course);
         }
@@ -41,17 +47,21 @@ namespace My_project.Controllers
         [HttpPost("CourseDetails/AddLecture")]
         public async Task<IActionResult> AddLecture(int CourseId, string LectureTitle, string VideoUrl)
         {
-            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == CourseId);
-            if (course == null)
-            {
-                return NotFound();
-            }
+            int? teacherId = HttpContext.Session.GetInt32("UserId");
+            if (teacherId == null) return RedirectToAction("Index", "Login");
+
+            var course = await _context.Courses
+                .FirstOrDefaultAsync(c => c.Id == CourseId && c.TeacherId == teacherId.Value);
+
+            if (course == null) return NotFound();
+
             var lecture = new CourseLecture
             {
                 CourseId = CourseId,
                 LectureTitle = LectureTitle,
                 VideoUrl = VideoUrl
             };
+
             _context.CourseLectures.Add(lecture);
             course.VideoCount += 1;
             _context.Courses.Update(course);
@@ -60,26 +70,23 @@ namespace My_project.Controllers
             return RedirectToAction("CourseDetails", new { id = CourseId });
         }
 
-        // কোর্স এবং তার আন্ডারে থাকা সব লেকচার ডিলিট করার জন্য পোস্ট মেথড
         [HttpPost("Delete/{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
+            int? teacherId = HttpContext.Session.GetInt32("UserId");
+            if (teacherId == null) return RedirectToAction("Index", "Login");
+
             var course = await _context.Courses
                 .Include(c => c.Lectures)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id && c.TeacherId == teacherId.Value);
 
-            if (course == null)
-            {
-                return NotFound();
-            }
+            if (course == null) return NotFound();
 
-            // লেকচারগুলো রিমুভ করা
             if (course.Lectures != null && course.Lectures.Any())
             {
                 _context.CourseLectures.RemoveRange(course.Lectures);
             }
 
-            // কোর্স রিমুভ করা
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
 
