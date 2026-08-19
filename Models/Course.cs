@@ -12,7 +12,7 @@ namespace My_project.Models
         public string Title { get; set; } = "";
 
         [Required]
-        public string Category { get; set; } = ""; // এখানে ঠিক করা হয়েছে
+        public string Category { get; set; } = "";
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
@@ -29,5 +29,7 @@ namespace My_project.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public List<CourseLecture> Lectures { get; set; } = new List<CourseLecture>();
+
+        public bool IsCourseApproved { get; set; } = false;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.AspNetCore.Identity;
 
 #nullable disable
 
@@ -32,7 +33,10 @@ namespace Online_Course_selling.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LectureVideoUrl = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+
+                    // --- এখানে IsCourseApproved কলামটি যুক্ত করে দেওয়া হলো ---
+                    IsCourseApproved = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +57,8 @@ namespace Online_Course_selling.Migrations
                     Password = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Role = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsApproved = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,10 +66,13 @@ namespace Online_Course_selling.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            // --- নতুন যোগ করা অংশ (অ্যাডমিন সিডিং) ---
-            migrationBuilder.Sql(@"
-                INSERT INTO Users (FullName, Email, Password, Role) 
-                SELECT 'System Admin', 'admin@gmail.com', 'Admin123', 'Admin'
+            // --- পাসওয়ার্ড হ্যাশ জেনারেট করার অংশ ---
+            var passwordHasher = new PasswordHasher<object>();
+            string hashedPassword = passwordHasher.HashPassword(null!, "Admin123");
+            // ----------------------------------------
+            migrationBuilder.Sql($@"
+                INSERT INTO Users (FullName, Email, Password, Role, IsApproved) 
+                SELECT 'System Admin', 'admin@gmail.com', '{hashedPassword}', 'Admin', 1
                 WHERE NOT EXISTS (
                     SELECT * FROM Users WHERE Email = 'admin@gmail.com'
                 );
@@ -75,7 +83,6 @@ namespace Online_Course_selling.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            // রোলব্যাক বা ডিলিট করার জন্য (ঐচ্ছিক)
             migrationBuilder.Sql("DELETE FROM Users WHERE Email = 'admin@gmail.com';");
 
             migrationBuilder.DropTable(
