@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2026 at 08:34 AM
+-- Generation Time: Aug 19, 2026 at 12:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,8 +39,12 @@ CREATE TABLE `courselectures` (
 --
 
 INSERT INTO `courselectures` (`Id`, `LectureTitle`, `VideoUrl`, `CourseId`) VALUES
-(27, 'CSS Tutorial #1: Overview & Structure | Web Development | Filipino | Tagalog', 'https://youtu.be/RU-R2BXSCVw?si=U1HRNeWqfMxKPaay', 10),
-(28, 'CSS Tutorial #2: Overview & Structure | Web Development | Filipino | Tagalog', 'https://youtu.be/RU-R2BXSCVw?si=XXlw69JlY9ozN8KR', 10);
+(51, ' web design front end developer Bangla Tutorial', 'https://youtu.be/FwmuhNTrJO4?si=hVk1g1xWX8jK3Hl2', 13),
+(52, 'html bangla tutorial 0 : Guiding Video | playlist details', 'https://youtu.be/J5nGBcgTHz8?si=vMtRzE3w-L6-sCzG', 13),
+(53, 'html bangla tutorial 1 : Introduction to HTML', 'https://youtu.be/d35dfSwBTNY?si=VC6kMzh1EAdxCJdx', 13),
+(54, 'html bangla tutorial 2: Tag, element & attribute', 'https://youtu.be/SEZ7YCF141I?si=bKtHElPpFOdWo5pk', 13),
+(55, ' html bangla tutorial 3 : basic structure | HTML এর সাধারণ গঠন', 'https://youtu.be/t9FkGMxsz_g?si=k1DRroJtVPwcVwGo', 13),
+(56, 'html bangla tutorial 4 : first html webpage', 'https://youtu.be/j4jh3iZ6t-M?si=VYcOn0An8BEGW422', 13);
 
 -- --------------------------------------------------------
 
@@ -65,7 +69,7 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`Id`, `Title`, `Category`, `Price`, `Description`, `ThumbnailUrl`, `CreatedAt`, `VideoCount`, `TeacherId`) VALUES
-(10, 'CSS learning', 'Web Development', 20.00, 'this is for css learning from css basic  ', '/uploads/thumbnails/9a2d5c55-ea1d-4f12-8bac-6b1a13f98e65_images (9).jpg', '2026-08-19 12:28:39.822906', 2, 3);
+(13, 'HTML tutorial for basic', 'Web Development', 10.00, 'this is for begineer HTML learning. You can learn from basic of HTML as a begineer.', '/uploads/thumbnails/41a01ff8-3e0d-432a-bd27-569ab990d3fb_images (9).jpg', '2026-08-19 16:46:23.032029', 6, 3);
 
 -- --------------------------------------------------------
 
@@ -149,13 +153,13 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT for table `courselectures`
 --
 ALTER TABLE `courselectures`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`

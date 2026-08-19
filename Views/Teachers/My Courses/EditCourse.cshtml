@@ -1,0 +1,146 @@
+@using My_project.Models
+@model My_project.Models.Course
+
+@{
+    ViewData["Title"] = "Edit Course";
+    Layout = "~/Views/Shared/_TeacherLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="mb-4">
+        <h3 class="fw-bold text-dark">Edit Course</h3>
+        <p class="text-muted small">Update your course information and lecture playlist.</p>
+    </div>
+
+    <form action="/Teachers/EditCourse/@Model.Id" method="post" enctype="multipart/form-data"
+          class="card border-0 shadow-sm rounded-4 p-4">
+
+        <!-- হিডেন ফিল্ডগুলো ডেটা ঠিক রাখার জন্য খুব জরুরি -->
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="TeacherId" value="@Model.TeacherId" />
+        <input type="hidden" name="ThumbnailUrl" value="@Model.ThumbnailUrl" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Course Title</label>
+                <input type="text" name="Title" value="@Model.Title" class="form-control rounded-3" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Category</label>
+                <select name="Category" class="form-select rounded-3" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="Web Development" selected="@(Model.Category == "Web Development")">Web Development
+                    </option>
+                    <option value="Programming Languages" selected="@(Model.Category == "Programming Languages")">
+                        Programming Languages</option>
+                        <option value="Database & SQL" selected="@(Model.Category == "Database & SQL")">Database & SQL
+                        </option>
+                        <option value="Data Science & AI" selected="@(Model.Category == "Data Science & AI")">Data Science &
+                            AI</option>
+                            <option value="Cyber Security" selected="@(Model.Category == "Cyber Security")">Cyber Security
+                            </option>
+                            <option value="Networking & DevOps" selected="@(Model.Category == "Networking & DevOps")">Networking
+                                & DevOps</option>
+                                <option value="UI/UX Design" selected="@(Model.Category == "UI/UX Design")">UI/UX Design</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Price ($)</label>
+                            <input type="number" step="0.01" name="Price" value="@Model.Price" class="form-control rounded-3"
+                                   required />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Thumbnail Image</label>
+                            <input type="file" name="ThumbnailImage" class="form-control rounded-3" />
+                            @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+                            {
+                                <div class="mt-2">
+                                    <img src="@Model.ThumbnailUrl" alt="Current Thumbnail" style="height: 60px;"
+                                         class="rounded shadow-sm" />
+                                    <span class="text-muted small ms-2">Current Thumbnail</span>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Description</label>
+                            <textarea name="Description" class="form-control rounded-3" rows="4"
+                                      required>@Model.Description</textarea>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <h5 class="fw-bold text-dark m-0">Course Lectures / Playlist</h5>
+                            <button type="button" class="btn btn-sm btn-outline-success rounded-3" id="addLectureBtn">
+                                <i class="bi bi-plus-lg me-1"></i> Add Lecture
+                            </button>
+                        </div>
+
+                        <div id="lectureContainer" class="col-12 d-flex flex-column gap-3">
+                            @if (Model.Lectures != null && Model.Lectures.Any())
+                            {
+                                @foreach (var lecture in Model.Lectures)
+                                {
+                                    <div class="lecture-item card bg-light border-0 p-3 rounded-3 position-relative">
+                                        <div class="row g-2 align-items-center">
+                                            <div class="col-md-5">
+                                                <input type="text" name="lectureTitles" value="@lecture.LectureTitle"
+                                                       class="form-control rounded-3" placeholder="Lecture Title" required />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" name="videoUrls" value="@lecture.VideoUrl" class="form-control rounded-3"
+                                                       placeholder="Video Embed/Watch URL" required />
+                                            </div>
+                                            <div class="col-md-1 text-end">
+                                                <button type="button" class="btn btn-danger btn-sm rounded-3 removeLecture">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-success rounded-3 px-4 py-2 fw-semibold">Update Course</button>
+                            <a href="/Teachers/MyCourses" class="btn btn-light rounded-3 px-4 py-2 ms-2">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <script>
+                document.getElementById('addLectureBtn').addEventListener('click', function () {
+                    let container = document.getElementById('lectureContainer');
+                    let lectureDiv = document.createElement('div');
+                    lectureDiv.className = 'lecture-item card bg-light border-0 p-3 rounded-3 position-relative';
+                    lectureDiv.innerHTML = `
+                        <div class="row g-2 align-items-center">
+                            <div class="col-md-5">
+                                <input type="text" name="lectureTitles" class="form-control rounded-3" placeholder="Lecture Title" required />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="videoUrls" class="form-control rounded-3" placeholder="Video Embed/Watch URL" required />
+                            </div>
+                            <div class="col-md-1 text-end">
+                                <button type="button" class="btn btn-danger btn-sm rounded-3 removeLecture">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(lectureDiv);
+                });
+
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('removeLecture') || e.target.closest('.removeLecture')) {
+                        let item = e.target.closest('.lecture-item');
+                        item.remove();
+                    }
+                });
+            </script>
