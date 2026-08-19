@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2026 at 10:07 PM
+-- Generation Time: Aug 19, 2026 at 10:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -94,7 +94,8 @@ INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
 ('20260817171746_addUserAndCourseTable', '9.0.0'),
 ('20260817174144_AddCourseLectures', '9.0.0'),
 ('20260817181341_RemoveVideoUrlAndAddVideoCount', '9.0.0'),
-('20260819060307_AddTeacherIdToCourse', '9.0.0');
+('20260819060307_AddTeacherIdToCourse', '9.0.0'),
+('20260819202519_AddTeacherForeignKeyToCourse', '9.0.0');
 
 --
 -- Indexes for dumped tables
@@ -111,7 +112,8 @@ ALTER TABLE `courselectures`
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_Courses_TeacherId` (`TeacherId`);
 
 --
 -- Indexes for table `users`
@@ -156,6 +158,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `courselectures`
   ADD CONSTRAINT `FK_CourseLectures_Courses_CourseId` FOREIGN KEY (`CourseId`) REFERENCES `courses` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `courses`
+--
+ALTER TABLE `courses`
+  ADD CONSTRAINT `FK_Courses_Users_TeacherId` FOREIGN KEY (`TeacherId`) REFERENCES `users` (`Id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -27,6 +27,11 @@ namespace My_project.Models
         [Required]
         public int TeacherId { get; set; }
 
+        // --- এই নেভিগেশন প্রপার্টিটি এখানে যুক্ত করা হলো ---
+        [ForeignKey("TeacherId")]
+        public User? Teacher { get; set; }
+        // ----------------------------------------------
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public List<CourseLecture> Lectures { get; set; } = new List<CourseLecture>();
 

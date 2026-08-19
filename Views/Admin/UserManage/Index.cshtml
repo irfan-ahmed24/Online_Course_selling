@@ -1,3 +1,5 @@
+@model IEnumerable<My_project.Models.User>
+
 @{
     ViewData["Title"] = "User Management";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -13,6 +15,7 @@
             <i class="bi bi-person-plus-fill me-1"></i> Add New User
         </a>
     </div>
+
     <div class="card border-0 shadow-sm rounded-4 p-4">
         @if (TempData["SuccessMessage"] != null)
         {
@@ -21,6 +24,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
@@ -32,52 +43,78 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
-                                     style="width: 45px; height: 45px;">
-                                    RA
-                                </div>
-                                <div>
-                                    <div class="fw-bold">Rahim Ahmed</div>
-                                    <small class="text-muted">rahim@example.com</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-info bg-opacity-10 text-info px-3 py-2">Student</span></td>
-                        <td><span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Verified</span></td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-primary rounded-3 me-1"><i
-                                class="bi bi-pencil-square"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger rounded-3"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-3"
-                                     style="width: 45px; height: 45px;">
-                                    SK
-                                </div>
-                                <div>
-                                    <div class="fw-bold">Sabbir Khan</div>
-                                    <small class="text-muted">sabbir@example.com</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Teacher</span></td>
-                        <td><span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Pending</span></td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-success rounded-3 me-1"><i class="bi bi-check-lg"></i>
-                                Approve
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger rounded-3"><i class="bi bi-x-lg"></i>
-                                Reject
-                            </button>
-                        </td>
-                    </tr>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var user in Model)
+                        {
+                            // নামের প্রথম দুই অক্ষর শর্টনেম হিসেবে নেওয়ার জন্য (Avatar এর ভেতরে দেখানোর জন্য)
+                            string initials = !string.IsNullOrEmpty(user.FullName) && user.FullName.Length >= 2
+                                ? user.FullName.Substring(0, 2).ToUpper()
+                                : "US";
+
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 fw-bold"
+                                             style="width: 45px; height: 45px;">
+                                            @initials
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">@user.FullName</div>
+                                            <small class="text-muted">@user.Email</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (user.Role == "Teacher")
+                                    {
+                                        <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Teacher</span>
+                                    }
+                                    else if (user.Role == "Admin")
+                                    {
+                                        <span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2">Admin</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info bg-opacity-10 text-info px-3 py-2">Student</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (user.IsApproved)
+                                    {
+                                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Verified</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Pending</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    @if (!user.IsApproved && user.Role == "Teacher")
+                                    {
+                                        <form asp-action="ApproveUser" asp-route-id="@user.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success rounded-3 me-1">
+                                                <i class="bi bi-check-lg"></i> Approve
+                                            </button>
+                                        </form>
+                                    }
+
+                                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post" class="d-inline"
+                                          onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-3">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">No users found in the database.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
