@@ -1,0 +1,108 @@
+@model My_project.Models.Course
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<div class="container py-4">
+    <!-- Breadcrumb / Back Link -->
+    <div class="mb-3">
+        <a href="/Students/AllCourses" class="text-decoration-none text-muted small fw-semibold">
+            <i class="bi bi-arrow-left me-1"></i> Back to All Courses
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <!-- Left Column: Course Main Content & Details -->
+        <div class="col-lg-8">
+            <!-- Course Header Card (Thumbnail & Overview) -->
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4 bg-white">
+                <div class="position-relative bg-dark" style="height: 320px;">
+                    @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+                    {
+                        <img src="@Model.ThumbnailUrl" alt="@Model.Title" class="w-100 h-100 object-fit-cover opacity-85">
+                    }
+                    else
+                    {
+                        <div
+                            class="d-flex align-items-center justify-content-center w-100 h-100 bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-file-earmark-play display-1"></i>
+                        </div>
+                    }
+                    <span class="position-absolute top-0 start-0 m-3 badge bg-primary px-3 py-2 rounded-pill shadow-sm">
+                        Professional Course
+                    </span>
+                </div>
+
+                <div class="card-body p-4">
+                    <h2 class="fw-bold text-dark mb-2">@Model.Title</h2>
+
+                    <div class="d-flex flex-wrap align-items-center gap-3 text-muted small mb-3">
+                        <div>
+                            <i class="bi bi-person-circle text-primary me-1"></i> Instructor:
+                            <span class="fw-semibold text-dark">@(Model.Teacher != null ? Model.Teacher.FullName :
+                                                                                                                                                                                                                                                                                                                                                  "Expert Instructor")</span>
+                            </div>
+                            <div>
+                                <i class="bi bi-collection-play text-success me-1"></i> Total Lectures:
+                                <span class="fw-semibold text-dark">@Model.VideoCount Lessons</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description Card -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <h4 class="fw-bold text-dark mb-3">About This Course</h4>
+                    <p class="text-secondary line-height-base">
+                        @Model.Description
+                    </p>
+                    <hr class="my-4 text-muted opacity-25">
+
+                </div>
+            </div>
+
+            <!-- Right Column: Pricing & Sticky Action Buttons -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top bg-white" style="top: 20px;">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="text-muted small fw-semibold uppercase">Course Price</span>
+                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill fw-bold">Best
+                            Value</span>
+                        </div>
+
+                        <h2 class="fw-bold text-success display-6 mb-4">$@Model.Price</h2>
+
+                        <!-- Action Buttons Container -->
+                        <div class="d-grid gap-2 mb-3">
+                            <!-- Enroll Now Button (Direct checkout or payment route) -->
+                            <a href="/Students/Checkout/@Model.Id" class="btn btn-success rounded-3 py-3 fw-bold shadow-sm">
+                                <i class="bi bi-lightning-charge-fill me-1"></i> Enroll Now
+                            </a>
+
+                            <!-- Add to Cart Button -->
+                            <form asp-controller="Cart" asp-action="Add" method="post" class="w-100">
+                                <input type="hidden" name="courseId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-outline-primary w-100 rounded-3 py-3 fw-bold shadow-sm">
+                                    <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Features Mini List -->
+                        <div class="border-top pt-3 mt-2 text-muted small">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-infinity text-primary me-2 fs-5"></i> Full lifetime access
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-phone text-primary me-2 fs-5"></i> Access on mobile and desktop
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-award text-primary me-2 fs-5"></i> Certificate of completion
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

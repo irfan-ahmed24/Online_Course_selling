@@ -13,6 +13,9 @@ namespace My_project.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseLecture> CourseLectures { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TeacherWallet> TeacherWallets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
