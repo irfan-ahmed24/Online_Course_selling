@@ -1,6 +1,13 @@
+@model My_project.Models.User
 @{
     ViewData["Title"] = "Student Profile";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
+
+    // নামের প্রথম দুই অক্ষর বের করার জন্য (Avatar এর জন্য)
+    var studentName = Model?.FullName ?? "Student";
+    var studentInitials = !string.IsNullOrEmpty(studentName) && studentName.Length >= 2
+                          ? studentName.Substring(0, 2).ToUpper()
+                          : "ST";
 }
 
 <div class="container-fluid">
@@ -10,11 +17,20 @@
         <p class="text-muted small">Update your personal information and security credentials.</p>
     </div>
 
-    <!-- Success / Error Alert -->
+    <!-- Success Alert -->
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
             <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Error Alert -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["ErrorMessage"]
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
@@ -26,13 +42,13 @@
                 <div class="position-relative d-inline-block mx-auto mb-3">
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm mx-auto"
                          style="width: 100px; height: 100px; font-size: 32px; font-weight: bold;">
-                        ST
+                        @studentInitials
                     </div>
                     <span class="position-absolute bottom-0 end-0 bg-primary border border-white rounded-circle p-2"
                           title="Active Student"></span>
                 </div>
-                <h5 class="fw-bold mb-1">Rahim Ahmed</h5>
-                <p class="text-muted small mb-3">student@onlinecourse.com</p>
+                <h5 class="fw-bold mb-1">@Model?.FullName</h5>
+                <p class="text-muted small mb-3">@Model?.Email</p>
                 <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill">Enrolled Student</span>
             </div>
         </div>
@@ -43,17 +59,17 @@
             <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
                 <h5 class="fw-bold mb-3"><i class="bi bi-person-gear text-primary me-2"></i> Personal Information</h5>
 
-                <form asp-controller="Student" asp-action="UpdateProfile" method="post">
+                <form action="/Students/Profile/Update" method="post">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Full Name</label>
-                            <input type="text" name="FullName" class="form-control rounded-3" value="Rahim Ahmed"
+                            <input type="text" name="FullName" class="form-control rounded-3" value="@Model?.FullName"
                                    required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold">Email Address</label>
-                            <input type="email" name="Email" class="form-control rounded-3"
-                                   value="student@onlinecourse.com" required>
+                            <input type="email" name="Email" class="form-control rounded-3" value="@Model?.Email"
+                                   required>
                         </div>
                     </div>
                     <div class="mt-2">
@@ -66,7 +82,7 @@
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
                 <h5 class="fw-bold mb-3"><i class="bi bi-shield-lock text-danger me-2"></i> Change Password</h5>
 
-                <form asp-controller="Student" asp-action="ChangePassword" method="post">
+                <form action="/Students/Profile/ChangePassword" method="post">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Current Password</label>
                         <input type="password" name="CurrentPassword" class="form-control rounded-3"

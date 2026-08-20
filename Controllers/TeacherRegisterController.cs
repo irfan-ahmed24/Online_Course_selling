@@ -42,13 +42,14 @@ namespace My_project.controllers
                 FullName = FullName,
                 Email = Email,
                 Password = hashedPassword,
-                Role = "Teacher"
+                Role = "Teacher",
+                IsApproved = false // --- এখানে IsApproved false করে দেওয়া হলো ---
             };
 
             _context.Users.Add(newTeacher);
             _context.SaveChanges();
 
-            TempData["SuccessMessage"] = "Teacher registration successful! Please login.";
+            TempData["SuccessMessage"] = "Teacher registration successful! Please wait for admin approval to login.";
             return RedirectToAction("Index", "Login");
         }
     }

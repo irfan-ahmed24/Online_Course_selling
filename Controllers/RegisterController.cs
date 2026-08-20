@@ -27,20 +27,26 @@ namespace My_project.controllers
                 TempData["ErrorMessage"] = "Passwords do not match. Please try again.";
                 return View();
             }
+
             var existingUser = _context.Users.FirstOrDefault(u => u.Email == Email);
             if (existingUser != null)
             {
                 TempData["ErrorMessage"] = "This email is already registered. Please try logging in.";
                 return View();
             }
+
             var passwordHasher = new PasswordHasher<User>();
             var hashedPassword = passwordHasher.HashPassword(new User(), Password);
+
             var newUser = new User
             {
                 FullName = FullName,
                 Email = Email,
-                Password = hashedPassword
+                Password = hashedPassword,
+                Role = "Student",          // রোল স্টুডেন্ট সেট করা হলো
+                IsApproved = true          // স্টুডেন্টের ক্ষেত্রে অটো অ্যাপ্রুভ true করে দেওয়া হলো
             };
+
             _context.Users.Add(newUser);
             _context.SaveChanges();
 

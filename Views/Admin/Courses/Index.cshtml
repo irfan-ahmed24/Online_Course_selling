@@ -1,3 +1,4 @@
+@model List<My_project.Models.Course>
 @{
     ViewData["Title"] = "Manage Courses";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -9,12 +10,13 @@
             <h3 class="fw-bold text-dark">Course Management</h3>
             <p class="text-muted small">Review, approve, or reject instructor-submitted courses.</p>
         </div>
-        <div class="btn-group shadow-sm rounded-3" role="group">
-            <button type="button" class="btn btn-outline-primary active btn-sm px-3">All Courses</button>
-            <button type="button" class="btn btn-outline-primary btn-sm px-3">Pending</button>
-            <button type="button" class="btn btn-outline-primary btn-sm px-3">Approved</button>
+        <div class="btn-group rounded-3" role="group" id="filterGroup">
+            <button type="button" class="btn btn-primary btn-sm px-3 active" onclick="filterCourses('all', this)">All Courses</button>
+            <button type="button" class="btn btn-outline-primary btn-sm px-3" onclick="filterCourses('pending', this)">Pending</button>
+            <button type="button" class="btn btn-outline-primary btn-sm px-3" onclick="filterCourses('approved', this)">Approved</button>
         </div>
     </div>
+
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
@@ -22,6 +24,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
+
     <div class="card border-0 shadow-sm rounded-4 p-4">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
@@ -34,74 +37,101 @@
                         <th class="py-3 text-end">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="bg-warning bg-opacity-10 text-warning rounded-3 d-flex align-items-center justify-content-center me-3"
-                                     style="width: 45px; height: 45px; font-weight: bold;">
-                                    <i class="bi bi-journal-code fs-5"></i>
-                                </div>
-                                <div>
-                                    <div class="fw-bold">React.js Advanced Masterclass</div>
-                                    <small class="text-muted">Submitted: Aug 15, 2026</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="text-dark fw-semibold">Sabbir Khan</span>
-                            <br><small class="text-muted">sabbir@example.com</small>
-                        </td>
-                        <td class="fw-bold text-success">$49.99</td>
-                        <td>
-                            <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Pending Review</span>
-                        </td>
-                        <td class="text-end">
-                            <form asp-controller="Admin" asp-action="ApproveCourse" method="post" class="d-inline">
-                                <input type="hidden" name="courseId" value="1" />
-                                <button type="submit" class="btn btn-sm btn-success rounded-3 me-1"
-                                        title="Approve Course">
-                                    <i class="bi bi-check-lg"></i> Approve
-                                </button>
-                            </form>
-                            <form asp-controller="Admin" asp-action="RejectCourse" method="post" class="d-inline">
-                                <input type="hidden" name="courseId" value="1" />
-                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-3"
-                                        title="Reject Course">
-                                    <i class="bi bi-x-lg"></i> Reject
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="bg-primary bg-opacity-10 text-primary rounded-3 d-flex align-items-center justify-content-center me-3"
-                                     style="width: 45px; height: 45px; font-weight: bold;">
-                                    <i class="bi bi-file-earmark-code fs-5"></i>
-                                </div>
-                                <div>
-                                    <div class="fw-bold">Complete Laravel & Vue.js SaaS</div>
-                                    <small class="text-muted">Submitted: Aug 10, 2026</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="text-dark fw-semibold">Rahim Ahmed</span>
-                            <br><small class="text-muted">rahim@example.com</small>
-                        </td>
-                        <td class="fw-bold text-success">$59.99</td>
-                        <td>
-                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Approved & Live</span>
-                        </td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-secondary rounded-3" title="View Details">
-                                <i class="bi bi-eye"></i> Details
-                            </button>
-                        </td>
-                    </tr>
+                <tbody id="courseTableBody">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var course in Model)
+                        {
+                            var statusType = course.IsCourseApproved ? "approved" : "pending";
+                            <tr class="course-row" data-status="@statusType">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning bg-opacity-10 text-warning rounded-3 d-flex align-items-center justify-content-center me-3"
+                                             style="width: 45px; height: 45px; font-weight: bold;">
+                                            <i class="bi bi-journal-code fs-5"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">@course.Title</div>
+                                            <small class="text-muted">Submitted: @course.CreatedAt.ToString("MMM dd, yyyy")</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-dark fw-semibold">@(course.Teacher?.FullName ?? "Unknown Instructor")</span>
+                                    <br><small class="text-muted">@(course.Teacher?.Email ?? "No email")</small>
+                                </td>
+                                <td class="fw-bold text-success">$@course.Price</td>
+                                <td>
+                                    @if (course.IsCourseApproved)
+                                    {
+                                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Approved & Live</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">Pending Review</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    @if (!course.IsCourseApproved)
+                                    {
+                                        <form action="/Admin/Courses/Approve/@course.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success rounded-3 me-1" title="Approve Course">
+                                                <i class="bi bi-check-lg"></i> Approve
+                                            </button>
+                                        </form>
+                                        <form action="/Admin/Courses/Reject/@course.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded-3" title="Reject Course">
+                                                <i class="bi bi-x-lg"></i> Reject
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-sm btn-outline-secondary rounded-3" title="View Details" disabled>
+                                            <i class="bi bi-check-all"></i> Active
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr id="noCoursesRow">
+                            <td colspan="5" class="text-center text-muted py-4">No courses found in the database.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function filterCourses(status, buttonElement) {
+            // Active button class update
+            const buttons = document.querySelectorAll('#filterGroup button');
+            buttons.forEach(btn => {
+                btn.classList.remove('btn-primary', 'active');
+                btn.classList.add('btn-outline-primary');
+            });
+            buttonElement.classList.remove('btn-outline-primary');
+            buttonElement.classList.add('btn-primary', 'active');
+
+            // Filter table rows
+            const rows = document.querySelectorAll('.course-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+                if (status === 'all' || rowStatus === status) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+}

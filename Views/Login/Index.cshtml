@@ -12,6 +12,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
+
+        <!-- --- এখানে ErrorMessage এর জন্য কোডটি যুক্ত করা হলো --- -->
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm mb-3" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <!-- ------------------------------------------------ -->
     </div>
     <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5 w-100"
          style="max-width: 420px; background-color: #ffffff;">

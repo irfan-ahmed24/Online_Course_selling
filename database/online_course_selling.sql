@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2026 at 10:32 PM
+-- Generation Time: Aug 20, 2026 at 09:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,7 +73,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `FullName`, `Email`, `Password`, `Role`, `IsApproved`) VALUES
-(1, 'System Admin', 'admin@gmail.com', 'AQAAAAIAAYagAAAAENfvPYdtjgq9SoU/GTIRFgX+L0ufGVMGhkAXRSri0YfkjXhMwbyr01/acC3Q3n9X0g==', 'Admin', 1);
+(1, 'System Admin', 'admin@gmail.com', 'AQAAAAIAAYagAAAAENfvPYdtjgq9SoU/GTIRFgX+L0ufGVMGhkAXRSri0YfkjXhMwbyr01/acC3Q3n9X0g==', 'Admin', 1),
+(4, 'Irfan ahmed', 'irfanahmed99989@gmail.com', 'AQAAAAIAAYagAAAAECB5NAJ0myiLHvpWXAhowRJsYWJ6vAkNhQ1JYcY563VsKPpTQTGrjhGYkACNRp/msQ==', 'Teacher', 1),
+(6, 'Irfan ahmed', 'irfanahmed89@gmail.com', 'AQAAAAIAAYagAAAAEEC0FpP9kOTODBLyVJJUsSBXKfIpkH2Kcl8J1DfcDVsw3m+6RE4wXvQZYz3H9z4RVw==', 'Student', 1);
 
 -- --------------------------------------------------------
 
@@ -135,19 +137,19 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT for table `courselectures`
 --
 ALTER TABLE `courselectures`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

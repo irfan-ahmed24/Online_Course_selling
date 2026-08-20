@@ -12,7 +12,7 @@
                 background-color: #f8f9fa;
             }
 
-            /* Sidebar Styling (স্টুডেন্টদের জন্য একটু আকর্ষণীয় ব্লু/ইন্ডিগো থিম) */
+            /* Sidebar Styling */
             #sidebar {
                 position: fixed;
                 top: 0;
@@ -76,27 +76,33 @@
 
         @{
             var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+            // সেশন থেকে ইউজারের নাম ও ইনিশিয়াল বের করা
+            var studentName = Context.Session.GetString("UserName") ?? "Student";
+            var studentInitials = !string.IsNullOrEmpty(studentName) && studentName.Length >= 2
+                                  ? studentName.Substring(0, 2).ToUpper()
+                                  : "ST";
         }
 
         <ul class="nav flex-column mt-3">
             <li class="nav-item">
-                <a href="Dashboard" class="nav-link @(currentAction == "Dashboard" ? "active" : "")">
+                <a href="/Students/Dashboard" class="nav-link @(currentAction == "Dashboard" ? "active" : "")">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="EnrolledCourses"
+                <a href="/Students/EnrolledCourses"
                    class="nav-link @(currentAction == "MyCourses" || currentAction == "WatchCourse" ? "active" : "")">
                     <i class="bi bi-journal-check"></i> My Enrolled Courses
                 </a>
             </li>
             <li class="nav-item">
-                <a href="AllCourses" class="nav-link @(currentAction == "AllCourses" ? "active" : "")">
+                <a href="/Students/AllCourses" class="nav-link @(currentAction == "AllCourses" ? "active" : "")">
                     <i class="bi bi-compass"></i> All Courses
                 </a>
             </li>
             <li class="nav-item">
-                <a href="Profile" class="nav-link @(currentAction == "Profile" ? "active" : "")">
+                <a href="/Students/Profile" class="nav-link @(currentAction == "Profile" ? "active" : "")">
                     <i class="bi bi-person-circle"></i> Profile
                 </a>
             </li>
@@ -123,7 +129,7 @@
                             <a asp-controller="Student" asp-action="Cart"
                                class="position-relative text-dark text-decoration-none p-2 fs-5" title="My Cart">
                                 <i class="bi bi-cart3"></i>
-                                <!-- কার্টে কয়টি কোর্স আছে তার কাউন্ট ব্যাজ -->
+                                <!-- কার্টে কয়টি কোর্স আছে তার কাউন্ট ব্যাজ -->
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                                     style="font-size: 10px;">
@@ -135,10 +141,10 @@
                             <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2 shadow-sm"
-                                     style="width: 38px; height: 38px; font-weight: bold;">
-                                    ST
+                                     style="width: 38px; height: 38px; font-weight: bold; font-size: 14px;">
+                                    @studentInitials
                                 </div>
-                                <span class="fw-semibold">Student</span>
+                                <span class="fw-semibold">@studentName</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2">
                                 <li><a class="dropdown-item py-2" href="Profile"><i
