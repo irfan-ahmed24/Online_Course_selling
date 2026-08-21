@@ -83,6 +83,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9UZWFjaGVyTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/learn-C\#/Online_Course_selling/Views/Students/AddToCart/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcQWRkVG9DYXJ0XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/learn-C\#/Online_Course_selling/Views/Students/AllCourses/CourseView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcQWxsQ291cnNlc1xDb3Vyc2VWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

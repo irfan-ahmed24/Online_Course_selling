@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2026 at 10:24 PM
+-- Generation Time: Aug 21, 2026 at 10:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cartitems`
+--
+
+CREATE TABLE `cartitems` (
+  `Id` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `CourseId` int(11) NOT NULL,
+  `DateAdded` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `courselectures`
 --
 
@@ -39,7 +52,13 @@ CREATE TABLE `courselectures` (
 --
 
 INSERT INTO `courselectures` (`Id`, `LectureTitle`, `VideoUrl`, `CourseId`) VALUES
-(13, 'CSS Tutorial #1: Overview & Structure | Web Development | Filipino | Tagalog', 'https://youtu.be/RU-R2BXSCVw?si=XXlw69JlY9ozN8KR', 3);
+(13, 'CSS Tutorial #1: Overview & Structure | Web Development | Filipino | Tagalog', 'https://youtu.be/RU-R2BXSCVw?si=XXlw69JlY9ozN8KR', 3),
+(14, ' CSS Tutorial #2: Linking CSS Files | Web Development | Filipino | Tagalog', 'https://youtu.be/mYwL50wgl6A?si=5tpyJKi4nABjkezm', 3),
+(15, 'CSS Tutorial #3: Simple Selectors | Web Development | Filipino | Tagalog', 'https://youtu.be/t11-ibOPZA0?si=lxW_y5v-kSZMApT-', 3),
+(16, 'data science 1', 'https://youtu.be/RU-R2BXSCVw?si=U1HRNeWqfMxKPaay', 4),
+(17, 'data science 2', 'https://youtu.be/FwmuhNTrJO4?si=hVk1g1xWX8jK3Hl2', 4),
+(18, 'cyber security', 'https://youtu.be/RU-R2BXSCVw?si=U1HRNeWqfMxKPaay', 5),
+(19, 'cyber security', 'https://youtu.be/FwmuhNTrJO4?si=hVk1g1xWX8jK3Hl2', 5);
 
 -- --------------------------------------------------------
 
@@ -65,7 +84,9 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`Id`, `Title`, `Category`, `Price`, `Description`, `ThumbnailUrl`, `CreatedAt`, `IsCourseApproved`, `VideoCount`, `TeacherId`) VALUES
-(3, 'learn CSS', 'Web Development', 200.00, 'this is css basic course', '/uploads/thumbnails/70bc6b10-5eba-480c-96ad-47692bb60bee_Screenshot 2025-10-30 205640.png', '2026-08-21 01:58:03.951254', 1, 1, 4);
+(3, 'learn CSS', 'Web Development', 200.00, 'this is css basic course', '/uploads/thumbnails/70bc6b10-5eba-480c-96ad-47692bb60bee_Screenshot 2025-10-30 205640.png', '2026-08-21 01:58:03.951254', 1, 3, 4),
+(4, 'Data science', 'Web Development', 200.00, 'in this course you can learn data science from basic to advanced', '/uploads/thumbnails/396a3173-263a-4ae9-97cb-bf02d077608c_1774294874246.jpg', '2026-08-21 19:50:29.003897', 1, 2, 7),
+(5, 'cyber security', 'Mobile App Development', 200.00, 'this is klsadjfl jflaksjfd oaisjfklasn aiwksejfksldnfmaiwjed alkijf kasmfd iwejfr klasmdf ', '/uploads/thumbnails/c24651f0-ba1a-44f8-bcfd-4dbac483786f_Screenshot 2026-04-27 211141.png', '2026-08-21 19:59:37.030589', 1, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -132,7 +153,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`Id`, `FullName`, `Email`, `Password`, `Role`, `IsApproved`) VALUES
 (1, 'System Admin', 'admin@gmail.com', 'AQAAAAIAAYagAAAAENfvPYdtjgq9SoU/GTIRFgX+L0ufGVMGhkAXRSri0YfkjXhMwbyr01/acC3Q3n9X0g==', 'Admin', 1),
 (4, 'Irfan ahmed', 'irfanahmed99989@gmail.com', 'AQAAAAIAAYagAAAAECB5NAJ0myiLHvpWXAhowRJsYWJ6vAkNhQ1JYcY563VsKPpTQTGrjhGYkACNRp/msQ==', 'Teacher', 1),
-(6, 'Irfan ahmed', 'irfanahmed89@gmail.com', 'AQAAAAIAAYagAAAAEEC0FpP9kOTODBLyVJJUsSBXKfIpkH2Kcl8J1DfcDVsw3m+6RE4wXvQZYz3H9z4RVw==', 'Student', 1);
+(6, 'Irfan ahmed', 'irfanahmed89@gmail.com', 'AQAAAAIAAYagAAAAEEC0FpP9kOTODBLyVJJUsSBXKfIpkH2Kcl8J1DfcDVsw3m+6RE4wXvQZYz3H9z4RVw==', 'Student', 1),
+(7, 'Forhad islam', 'forhadislam@gmail.com', 'AQAAAAIAAYagAAAAEJSU0VzENfBBfsVVJIiJWWc9PujXOF0OPziJANyFvramovVKr8UB5Pk19mWgabelew==', 'Teacher', 1),
+(8, 'mostak', 'mostak@gmail.com', 'AQAAAAIAAYagAAAAEEXjf1Y3WXZvL1hgqZAcyqDvb26Iws+R4ebQ5QIRi+BhhSUFj4wGYaKnJeTkZbirrw==', 'Teacher', 1);
 
 -- --------------------------------------------------------
 
@@ -158,11 +181,19 @@ INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
 ('20260820191513_AddEnrollmentsTable', '9.0.0'),
 ('20260820191724_AddTransactionsTable', '9.0.0'),
 ('20260820191909_AddTeacherWalletsTable', '9.0.0'),
-('20260820192153_AddTeacherWalletsTable', '9.0.0');
+('20260820192153_AddTeacherWalletsTable', '9.0.0'),
+('20260821183701_AddCartTable', '9.0.0');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cartitems`
+--
+ALTER TABLE `cartitems`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `IX_CartItems_CourseId` (`CourseId`);
 
 --
 -- Indexes for table `courselectures`
@@ -219,16 +250,22 @@ ALTER TABLE `__efmigrationshistory`
 --
 
 --
+-- AUTO_INCREMENT for table `cartitems`
+--
+ALTER TABLE `cartitems`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `courselectures`
 --
 ALTER TABLE `courselectures`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
@@ -252,11 +289,17 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cartitems`
+--
+ALTER TABLE `cartitems`
+  ADD CONSTRAINT `FK_CartItems_Courses_CourseId` FOREIGN KEY (`CourseId`) REFERENCES `courses` (`Id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `courselectures`

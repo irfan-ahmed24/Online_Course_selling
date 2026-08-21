@@ -16,6 +16,7 @@ namespace My_project.Data
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TeacherWallet> TeacherWallets { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using My_project.Data;
-using My_project.Middlewares; // কাস্টম মিডলওয়্যারের নেমস্পেস যুক্ত করা হলো
+using My_project.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +33,7 @@ app.UseRouting();
 app.UseSession();
 app.UseMiddleware<LoginMiddleware>();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
